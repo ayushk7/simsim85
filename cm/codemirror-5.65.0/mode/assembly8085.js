@@ -16,7 +16,7 @@ CodeMirror.defineSimpleMode("assembly8085", {
       {regex: /(?:aci|adc|add|adi|ana|ani|call|cc|cm|cma|cmc|cmp|cnc|cnz|cp|cpe|cpi|cpo|cz|daa|dad|dcr|dcx|di|ei|ei|hlt|in|inr|inx|jc|jnc|jm|jmp|jnz|jp|jpe|jpo|j|lda|ldax|lhld|lxi|mov|mvi|nop|ora|ori|out|pchl|pop|push|ral|rar|rc|ret|rim|rlc|rm|rnc|rnz|rp|rpe|rpo|rrc|rst|rz|sbb|sbi|shld|sim|sphl|sta|stax|stc|sub|sui|xchg|xra|xri|xthl)\b/i,
        token: "keyword"},
       {regex: /true|false|null|undefined/, token: "atom"},
-      {regex: /0x[a-f\d]+|[-+]?(?:\.\d+|\d+\.?\d*)(?:e[-+]?\d+)?h/i,
+      {regex: /[a-fA-F0-9]+h/i,
        token: "number"},
       {regex: /\/\/.*/, token: "comment"},
       {regex: /\/(?:[^\\]|\\.)*?\//, token: "variable-3"},
@@ -24,7 +24,7 @@ CodeMirror.defineSimpleMode("assembly8085", {
       {regex: /\/\*/, token: "comment", next: "comment"},
       {regex: /[-+\/*=<>!]+/, token: "operator"},
       // indent and dedent properties guide autoindentation
-      {regex: /[\{\[\(]/, indent: true},
+      {regex: /[:]/, indent: true},
       {regex: /[\}\]\)]/, dedent: true},
       {regex: /#[a-zA-Z][a-zA-Z0-9]*/, token: "variable"},
       {regex: /[a-zA-Z][a-zA-Z0-9]*/i, token: "variable-4"},

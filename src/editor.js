@@ -2,6 +2,8 @@ export const editor = CodeMirror(document.getElementById("editor-container"), {
     value: "//the program is loaded at 0000h\n",
     mode: "assembly8085",
     lineNumbers: true,
+    // indentWithTabs: true,
+    indentUnit: 4,
     gutter: ["CodeMirror-linenumbers", "breakpoints"]
 });
 // editor.on("gutterClick", function (cm, n) {

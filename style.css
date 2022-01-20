@@ -139,8 +139,6 @@ html{
 
 }
 .memory-address-input{
-    margin-top: 4rem;
-    align-self: flex-end;
     height: 3rem;
     display: flex;
     justify-content: center;
@@ -326,4 +324,26 @@ html{
 }
 .breakpoints{
     width: 5px;
+}
+.memory-dash-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4rem;
+    width: 100%;
+}
+.mem-rst-btn{
+    background: #FF4C29;
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px #FF4C29;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+.mem-rst-btn:hover{
+    background: white;
+    color: #FF4C29;
 }
