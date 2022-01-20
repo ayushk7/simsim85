@@ -18,112 +18,52 @@
 
 <body>
     <div class="app">
-        <div class="pws-panels">
-            <button id="reset-regs">Reset</button>
-            <div class="registers-view-panel" id="registers-view-panel">
-                <!-- <div class="regester-view" id="regA">
-                    <label for="regA-value"> <p>A</p>
-                        <input type="text" name="regA-value">
-                    </label>
-                </div>
-                <div class="regester-view" id="regB">
-                    <label for="regB-value"><p>B</p>
-                        <input type="text" name="regB-value">
-                    </label>
-                </div>
-                <div class="regester-view" id="regC">
-                    <label for="regC-value"><p>C</p>
-                        <input type="text" name="regC-value">
-                    </label>
-                </div>
-                <div class="regester-view" id="regD">
-                    <label for="regD-value"><p>D</p>
-                        <input type="text" name="regD-value">
-                    </label>
-                </div>
-                <div class="regester-view" id="regE">
-                    <label for="regE-value"><p>E</p>
-                        <input type="text" name="regE-value">
-                    </label>
-                </div>
-                <div class="regester-view" id="regH">
-                    <label for="regH-value"><p>H</p>
-                        <input type="text" name="regH-value">
-                    </label>
-                </div>
-                <div class="regester-view" id="regL">
-                    <label for="regL-value"><p>L</p>
-                        <input type="text" name="regL-value">
-                    </label>
-                </div>
-                <div class="regester-view" id="regSP">
-                    <label for="regSP-value"><p>SP</p>
-                        <input type="text" name="regSP-value">
-                    </label>
-                </div>
-                <div class="regester-view" id="regPC">
-                    <label for="regPC-value"><p>PC</p>
-                        <input type="text" name="regPC-value">
-                    </label>
-                </div> -->
+        <div class="memory">
+
+            <div class="memory-address-input">
+                <span class="loc-text">Location</span>
+                <input type="text" name="memory-address-input" id="memory-address-input" class="ip-input" value="0000" dir="rtl"
+                    maxlength="4" placeholder="0000">
+                <span class="loc-text">H</span>
             </div>
-            <button id="reset-flags">Reset</button>
-            <div class="flag-view-panel" id="flag-view-panel">
-                <!-- <div class="flag-view">
-                    <label for="flagZ-value">
-                        <p>Z</p>
-                        <input type="checkbox" name="flagZ-value">
-                    </label>
-                </div>
-                <div class="flag-view">
-                    <label for="flagP-value">
-                        <p>P</p>
-                        <input type="checkbox" name="flagP-value">
-                    </label>
-                </div>
-                <div class="flag-view">
-                    <label for="flagS-value">
-                        <p>S</p>
-                        <input type="checkbox" name="flagS-value">
-                    </label>
-                </div>
-                <div class="flag-view">
-                    <label for="flagCY-value">
-                        <p>CY</p>
-                        <input type="checkbox" name="flagCY-value">
-                    </label>
-                </div>
-                <div class="flag-view">
-                    <label for="flagAC-value">
-                        <p>AC</p>
-                        <input type="checkbox" name="flagAC-value">
-                    </label>
-                </div> -->
-            </div>
-        </div>
-        <div class="editor">
-            <div class="editor-container" id="editor-container">
+            <div class="memory-container" id="memory-container">
 
             </div>
+        </div>
+
+        <div class="editor">
             <div class="exec-btns-container">
+                <button id="assemble-btn" class="exec-btn">Assemble</button>
                 <button id="run-btn" class="exec-btn">Run</button>
                 <button id="start-db-btn" class="exec-btn">StartDebugger</button>
                 <button id="execute-next-btn" class="exec-btn" disabled>Next</button>
                 <button id="move-prev-btn" class="exec-btn" disabled>Prev</button>
-            </div>
-
-        </div>
-        <div class="memory">
-            <div class="memory-container" id="memory-container">
+                <button id="gh-btn" class="exec-btn">Github</button>
 
             </div>
-            <div class="memory-address-input">
-                <label for="memory-address-input">
-                    <input type="text" name="memory-address-input" id="memory-address-input" value="0000" dir="rtl"
-                        maxlength="4">
-                </label>
+            <div class="editor-container" id="editor-container">
+
+            </div>
+            <div class="opcode-container hidden">
+                <span class="close-opcode" id="close-opcode">x</span>
+                <div class="opcode-text"></div>
+            </div>
+
+
+        </div>
+        <div class="pws-panels">
+            <div class="psw-panel">
+                <button id="reset-regs" class="rst-btn">Reset</button>
+                <div class="registers-view-panel" id="registers-view-panel">
+                </div>
+            </div>
+            <div class="psw-panel">
+                <button id="reset-flags" class="rst-btn" style="margin-bottom: 0.5rem;">Reset</button>
+                <div class="flag-view-panel" id="flag-view-panel">
+                </div>
             </div>
         </div>
+
     </div>
 </body>
 

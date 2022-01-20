@@ -403,6 +403,7 @@ export class Assembler {
     }
     getBin(opcode) {
         const value = this.OP_TO_BIN[opcode];
+        console.log(value);
         if (value) {
             return value;
         }
@@ -451,10 +452,8 @@ export class Assembler {
             catch (e) {
                 this.showErrorAtLine(i);
                 console.error(`Unexpected Token At line: ${i}, col: ${e.offset}`);
-                console.log(e);
                 break;
             }
-            console.log(this.lines[i]);
             this.currentLineNumber = i;
             this.convert(i, true);
         }
@@ -469,7 +468,6 @@ export class Assembler {
             catch (e) {
                 this.showErrorAtLine(i);
                 console.error(`Unexpected Token At line: ${i}, col: ${e.offset}`);
-                console.log(e);
                 break;
             }
             // console.log(this.lines[i]);
@@ -479,13 +477,13 @@ export class Assembler {
     }
     convert(lineNumber, label) {
         const tmp = [];
-        if(this.parser.results.length == 0){
+        if (this.parser.results.length == 0) {
             this.showErrorAtLine(lineNumber);
             console.error(`Unexpected Token At ${0}}`);
         }
 
         const res = this.parser.results[0];
-        if (res.length == 0) {
+        if (!res || res.length == 0) {
             this.showErrorAtLine(lineNumber);
             console.error(`Unexpected Token At ${0}}`);
             return;
@@ -497,10 +495,15 @@ export class Assembler {
         }
         if (res.inst) {
             const bins = this.handleInst(res.inst, label);
+            if (bins === false || bins.length === 0) {
+                this.showErrorAtLine(lineNumber);
+                // console.error(`Unexpected Token At ${0}}`);
+                return;
+            }
             // console.log(bins);
             this.currentLocation += bins.length;
             // console.log({ loc: this.currentLocation, bin: bins, len: bins.length });
-            for(const bin of bins){
+            for (const bin of bins) {
                 tmp.push(bin);
             }
         }
@@ -518,6 +521,9 @@ export class Assembler {
     handleInst(inst, forLabel) {
         let opcode = inst.opcode.toLowerCase();
         const details = this.getDetails(opcode);
+        if (!details) {
+            return false;
+        }
         const a1 = details.arg1;
         const a2 = details.arg2;
         let tmp = []

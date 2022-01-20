@@ -95,18 +95,18 @@ export class Processor {
         const reset_flag_btn = document.getElementById("reset-flags");
         const reset_reg_btn = document.getElementById("reset-regs");
         const proc = this;
-        reset_flag_btn.addEventListener("click", () => { console.log('clicked'); proc.resetFlags() });
-        reset_reg_btn.addEventListener("click", () => { console.log('clicked'); proc.resetRegisters() });
+        reset_flag_btn.addEventListener("click", () => { proc.resetFlags() });
+        reset_reg_btn.addEventListener("click", () => { proc.resetRegisters() });
 
     }
 
     getHexBox(regName) {
         const conatiner = document.createElement("div")
         conatiner.id = `reg${regName}`
-        conatiner.classList.toggle("register-view", true)
-        const label = document.createElement("label")
+        conatiner.classList.toggle("reg-ip", true);
+        const label = document.createElement("span")
         label.setAttribute("for", `reg${regName}-value`)
-        label.classList.toggle("hex-box-label", true)
+        label.classList.toggle("loc-text", true)
         const box1 = document.createElement("input")
         box1.setAttribute('type', 'text');
         this.registerConfig[regName].value = this.registerConfig[regName].defValue
@@ -114,7 +114,7 @@ export class Processor {
         box1.setAttribute('maxlength', this.registerConfig[regName].size);
         box1.setAttribute('dir', 'rtl')
         box1.setAttribute('name', `reg${regName}-value`)
-        box1.classList.toggle('hex-box', true)
+        box1.classList.toggle('ip-input', true)
         this.registerConfig[regName].nodeRef = box1
         box1.addEventListener('input', (e) => {
             if (e.inputType === "insertText" && !IsHexChar(e.data)) {
@@ -130,24 +130,26 @@ export class Processor {
         })
         const labelText = document.createTextNode(regName);
         label.append(labelText)
-        const hexlbl = document.createElement("div")
+        const hexlbl = document.createElement("span")
         hexlbl.innerText = 'H'
-        hexlbl.classList.toggle("hex-lbl", true)
+        hexlbl.classList.toggle("loc-text", true);
+        hexlbl.classList.toggle("hexy", true);
         const innerInputContainer = document.createElement('div')
         innerInputContainer.classList.toggle('hex-box-inner-container', true)
         innerInputContainer.append(box1)
         innerInputContainer.append(hexlbl)
         conatiner.append(label)
-        conatiner.append(innerInputContainer)
+        conatiner.append(box1)
+        conatiner.append(hexlbl)
         return conatiner
     }
     getFlagBox(flagName) {
         const conatiner = document.createElement("div")
         conatiner.id = `flag${flagName}`
-        conatiner.classList.toggle("flag-view", true)
-        const label = document.createElement("label")
+        conatiner.classList.toggle("flag-ip", true)
+        const label = document.createElement("span")
         label.setAttribute("for", `flag${flagName}-value`)
-        label.classList.toggle("flag-box-label", true)
+        label.classList.toggle("loc-text", true)
         const box1 = document.createElement("input")
         box1.setAttribute('type', 'checkbox');
         this.flagConfig[flagName].value = this.flagConfig[flagName].defValue
@@ -156,7 +158,6 @@ export class Processor {
         box1.classList.toggle('flag-box', true)
         box1.addEventListener('change', (e) => {
             this.flagConfig[flagName].value = e.target.checked ? 1 : 0;
-            console.log(flagName, this.flagConfig[flagName].value);
         })
         this.flagConfig[flagName].nodeRef = box1
         const labelText = document.createTextNode(flagName);
@@ -712,7 +713,11 @@ export class Processor {
                 break;
             case 0xE9: this.pchl();
                 break;
-
+            default:
+                {
+                    alert(`Sorry, "${HEX(this.memory.read(this.registerConfig['PC'].value), 2)}" is unimplemented. Please raise a issue on github.`)
+                    return false
+                }
         }
     }
     updateDebugView() {
@@ -720,31 +725,34 @@ export class Processor {
         this.updateFlagView();
         this.updateRegisterView();
     }
-    onJump(onJumpCallback){
+    onJump(onJumpCallback) {
         this.onJumpCallback = onJumpCallback;
     }
-    offJump(){
+    offJump() {
         this.onJumpCallback = null;
     }
-    isJump(from, to){
-        if(this.onJumpCallback)
-            this.onJumpCallback(from, to);        
+    isJump(from, to) {
+        if (this.onJumpCallback)
+            this.onJumpCallback(from, to);
     }
     setPCNoJump(start_address) {
         this.registerConfig['PC'].value = start_address;
     }
     executor(start_address, debug) {
-        let count = 10000;
+        let count = 5000;
         this.setPCNoJump(start_address);
         while (this.registerConfig['PC'].value !== this.memory.end) {
             const res = this.execute();
             count--;
-            if(count <= 0){
+            if (count <= 0) {
                 alert("Reached out the max time limit");
                 return;
             }
             if (res === "STOP") {
                 this.updateDebugView();
+                return;
+            }
+            if (res === false) {
                 return;
             }
             if (debug.reg_db) {
@@ -1019,7 +1027,6 @@ export class Processor {
         a_content += other;
         a_content %= 256;
         this.registerConfig['A'].value = a_content;
-        console.log(`from ${this.registerConfig['A'].value}`);
 
     }
     sub(reg2) {

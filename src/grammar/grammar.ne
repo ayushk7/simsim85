@@ -19,16 +19,20 @@ opcode -> [A-Za-z] {% id %}
 
 arg -> register {%function(d) {return {'type': 'reg', 'value': d[0]}}%} 
 	| hex {%function(d) {return {'type': 'hex', 'value': d[0]}}%}
+	| label {%function(d) {return {'type': 'label', 'value': d[0]}}%}
 
-register -> [aAbBcCdDeEhHlL] {%id%}
+register -> [aAbBcCdDeEhHlLmM] {%id%}
 			| "sp" {%id%}
 			| "SP" {%id%}
 			| "pc" {%id%}
 			| "PC" {%id%}
+			| "psw" {%id%}
+			| "PSW" {%id%}
 			
 hex -> [0-9a-fA-F] [hH] {%function(d) { return "" + d[0] + d[1] }%}
 		|[0-9a-fA-F] hex {% function(d) { return "" + d[0] + d[1] } %}
 
+label -> "#" word {% function(d) { return "" + d[1] } %}
 
 word -> [A-Za-z] {% id %}
         | word [A-Za-z0-9] {% function(d) { return "" + d[0] + d[1] } %}

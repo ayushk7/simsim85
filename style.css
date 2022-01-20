@@ -8,6 +8,7 @@
 html{
     
     font-size: 10px;
+    background: #082032;
 }
 .app{
     display: flex;
@@ -15,48 +16,81 @@ html{
     height: 100vh;
     justify-content: flex-start;
     align-items: center;
+    flex-wrap: wrap;
     font-size: 2rem;
 
 }
 .pws-panels{
-    flex-grow: 1;
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-left: 4rem;
+}
+.psw-panel{
+    margin-top: 8rem;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.rst-btn{
+    padding: 1rem;
+    font-size: 1.5rem;
+    height: 100%;
+    background: #FF4C29;
+    color: white;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    background-color: lightgrey;
+    border: solid 1px #FF4C29;
+    outline: none;
+    /* border: none; */
+}
+.rst-btn:hover{
+    color: #FF4C29;
+    background: white;
 }
 .register-view-panel{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     background-color: lightsalmon;
 }
 .register-view{
     text-align: center;
     display: flex;
     justify-content: flex-start;
-    align-items: center;
-    margin: 1rem;
+    align-items: flex-end;
+    /* margin: 1rem; */
 }
 .hex-box-label{
-    width: 4rem;
+    padding: 1rem;
+    font-size: 1.5rem;
+    height: 100%;
+    background: #FF4C29;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px #FF4C29;
 }
 .hex-box{
     /* margin: 0.2rem 0.2rem; */
-    margin: 0;
     border: none;
     outline: none;
-    height: 2rem;
-    padding: 0.5rem;
+    height: 100%;
+    font-size: 1.5rem;
+    padding-right: 1rem;
 }
 .hex-box-inner-container{
     display: inline-flex;
     justify-content: flex-start;
     align-items: center;
-    border: grey 1px solid;
+    border: #FF4C29 1px solid;
 }
 .hex-lbl{
     font-size: medium;
@@ -66,7 +100,7 @@ html{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(206, 229, 236);
+    background-color: #FF4C29;
 }
 
 .flag-view-panel{
@@ -74,7 +108,7 @@ html{
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    background-color: lightgreen;
+    /* background-color: lightgreen; */
 }
 .flag-view{
     width: 100%;
@@ -82,22 +116,122 @@ html{
 }
 .editor{
     height: 100vh;
-    width: 40%;
-    background-color: lightblue;
+    width: 35%;
+    /* background-color: lightblue; */
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start;
     flex-direction: column;
     align-items: center;
 }
 .memory{
     /* flex-grow: 1; */
-    background-color: lightpink;
+    /* background-color: lightpink; */
     /* width: 100%; */
     height: 100%;
     padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+.memory-container{
+    /* border: 1px grey solid; */
+
+}
+.memory-address-input{
+    margin-top: 4rem;
+    align-self: flex-end;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px #FF4C29;
+
+}
+.ip-input{
+    border: none;
+    outline: none;
+    height: 100%;
+    font-size: 1.5rem;
+    padding-right: 1rem;
+}
+.reg-ip{
+    margin: 1rem 0rem;
+    height: 3rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    /* border: solid 1px #FF4C29; */
+}
+.flag-ip{
+    margin: 0.5rem 0rem;
+    height: 3rem;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.flag-ip-label{
+    align-self: flex-start;
+}
+.flag-box{
+    margin-left: 1rem;
+    width: 2rem;
+    height: 2rem;
+
+}
+.flag-box:checked{
+    color: #FF4C29;
+}
+.hexy{
+    border: 1px solid #FF4C29;
+}
+.loc-text{
+    padding: 1rem;
+    font-size: 1.5rem;
+    height: 100%;
+    background: #FF4C29;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px #FF4C29;
 }
 .editor-container{
+    margin-top: 4rem;
     width: 100%;
+}
+.opcode-container{
+    width: 100%;
+    /* min-height: 4rem; */
+    margin: 2rem;
+    padding: 4rem;
+    background-color: #2C394B;
+    position: relative;
+}
+.close-opcode{
+    color: white;
+    font-size: large;
+    position: absolute;
+    top: 0rem;
+    right: 0rem;
+    height: 2rem;
+    width: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* transform: rotateZ(45deg); */
+    /* background-color: white; */
+    cursor: pointer;
+    /* border-radius: 50%; */
+}
+.opcode-text{
+    max-height: 40rem;
+    overflow: auto;
+    color: white;
+}
+.hidden{
+    display: none;
 }
 
 .code-tape{
@@ -119,9 +253,10 @@ html{
     justify-content: center;
 }
 .memory-view-class{
+    margin-top: 4rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     height: 100%;
     /* width: fit-content; */
@@ -141,33 +276,53 @@ html{
     width: 4rem;
     height: 4rem;
     padding: 1rem;
+    background: #334756;
+    color: white;
 }
 .memory-cell:hover{
-    background-color: rgb(195, 232, 246);
+    color: white;
+    background-color: #FF4C29;
 }
 .memory-cell-sp{
-    background-color: lightgray;
-    /* padding: 1.5rem; */
+    background-color: #2C394B;
     display: flex;
     justify-content: center;
     align-items: center;
-    /* text-align: center; */
     font-size: small;
+    color: white;
 }
 .memory-cell-sp:hover{
-    background-color: lightskyblue;
+    background-color: white;
+    color: #2C394B;
 }
 .exec-btns-container{
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
+}
+.exec-btn:last-child{
+    border-right: none;
 }
 .exec-btn{
     outline: none;
     /* background-color: white; */
-    border: 1px solid black;
-    padding: 0.5rem 1rem;
-    margin: 1rem;
+    border: none;
+    padding: 1rem;
+    background: #FF4C29;
+    border: solid 1px #FF4C29;
+    color: white;
+    font-size: 1.5rem;
+    /* margin: 1rem; */
+    cursor: pointer;
+}
+.exec-btn:hover{
+    background-color: white;
+    color: #FF4C29;
+}
+.exec-btn:disabled{
+    background: #ff6b4d;
+    color: rgb(216, 216, 216);
+    cursor:not-allowed;
 }
 .breakpoints{
     width: 5px;

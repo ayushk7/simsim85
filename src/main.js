@@ -12,6 +12,26 @@ const run_btn = document.getElementById("run-btn");
 const start_db_btn = document.getElementById("start-db-btn");
 const execute_next_btn = document.getElementById("execute-next-btn");
 // const move_prev_btn = document.getElementById("move-prev-btn");
+const opcode_container = document.getElementsByClassName("opcode-container")[0];
+document.getElementById("gh-btn").addEventListener("click", () => {
+  window.open("https://github.com/ayushk7/simsim85");
+})
+
+document.getElementById("assemble-btn").addEventListener("click", () => {
+  const assembled = assembler.assemble(LOAD_LOCATION);
+  setOpcodeBox(assembled);
+  window.scrollTo({
+    top: 1000
+  })
+})
+
+
+opcode_container.addEventListener("click", (e) => {
+  if(e.target.id === "close-opcode"){
+    opcode_container.classList.toggle("hidden", true);
+  }
+})
+
 let isDebugging = false;
 let debugBinaries = null;
 let curr_line = 0;
@@ -67,8 +87,6 @@ function executeNext() {
     const ret = processor.execute();
     curr_line++;
     processor.updateDebugView();
-    console.log(processor.registerConfig['PC'].value);
-    console.log(curr_line, ret);
     if (ret === "STOP") {
       stopDebugging();
       return;
@@ -87,12 +105,10 @@ start_db_btn.addEventListener("click", () => {
   if (isDebugging) {
     debugBinaries = assembler.assemble(LOAD_LOCATION);
     startDebugging();
-    console.log(debugBinaries);
     load(debugBinaries, LOAD_LOCATION);
     processor.setPCNoJump(LOAD_LOCATION);
     const pcOnLine = pcToLine(debugBinaries, LOAD_LOCATION);
     processor.onJump((from, to) => {
-      console.log(from, to);
       curr_line = pcOnLine.get(to) - 1;
     });
   }
@@ -113,7 +129,8 @@ run_btn.addEventListener("click", () => {
   saveScript();
   const assembled = assembler.assemble(LOAD_LOCATION);
   console.log(assembled);
-  assembled.forEach(item => console.log(item));
+  setOpcodeBox(assembled);
+  // assembled.forEach(item => console.log(item));
   load(assembled, LOAD_LOCATION);
   processor.executor(LOAD_LOCATION, { reg_db: true, flag_db: true });
 });
@@ -158,7 +175,6 @@ function load(assembled, start_address) {
   assembled.forEach((bins, lineNumber) => {
     bins.forEach(bin => {
       ram.write(start_address + i++, bin);
-      console.log(bin);
     });
   });
   processor.memory.updateCurrentFrame();
@@ -174,6 +190,21 @@ function pcToLine(lineToInst, start_address) {
   });
   return ans;
 
+}
+
+function setOpcodeBox(assembled){
+  const line_srings = [];
+  assembled.forEach((bins, lineNumber) => {
+    const tmp = [];
+    bins.forEach(bin => {
+      tmp.push(HEX(bin, 2) + " ");
+    })
+    line_srings.push(tmp);
+  })
+
+  const text = line_srings.join("\n");
+  opcode_container.children[1].innerText = text;
+  opcode_container.classList.toggle("hidden", false);
 }
 
 // for(let i=0; i<code.length; i++){

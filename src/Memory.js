@@ -145,7 +145,7 @@ export class Memory {
                     e.target.value = '0' + e.target.value
                 }
                 this.write(this.currentFrame * 256 + row_number * 16 + i, DEC(e.target.value), 'sync')
-                console.log(this.read(this.currentFrame * 256 + row_number * 16 + i));
+                // console.log(this.read(this.currentFrame * 256 + row_number * 16 + i));
             })
             row.append(cell);
         }
@@ -177,7 +177,6 @@ export class Memory {
         }
     }
     updateFrame(frameNumber) {
-        console.log('rendered');
         for (let r = 0; r < 16; r++) {
             // console.log(frame);
             // console.log(frame*256 + r*16);
