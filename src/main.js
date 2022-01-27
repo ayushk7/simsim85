@@ -11,11 +11,26 @@ const LOAD_LOCATION = 0x0000;
 const run_btn = document.getElementById("run-btn");
 const start_db_btn = document.getElementById("start-db-btn");
 const execute_next_btn = document.getElementById("execute-next-btn");
+const help_btn = document.getElementById("help-btn");
 // const move_prev_btn = document.getElementById("move-prev-btn");
-const opcode_container = document.getElementsByClassName("opcode-container")[0];
+const opcode_container = document.getElementById("opcode-container-box");
+const help_container = document.getElementById("help-container");
+
+help_container.addEventListener("click", (e) => {
+  if(e.target.id === "close-help"){
+    help_container.classList.toggle("hidden", true);
+  }
+})
+
+help_btn.addEventListener("click", () => {
+  help_container.classList.toggle("hidden");
+})
+
 document.getElementById("gh-btn").addEventListener("click", () => {
   window.open("https://github.com/ayushk7/simsim85");
 })
+
+
 
 document.getElementById("assemble-btn").addEventListener("click", () => {
   const assembled = assembler.assemble(LOAD_LOCATION);

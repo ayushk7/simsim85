@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>85SimSim</title>
+    <title>SimSim85</title>
     <link rel="stylesheet" href="./style.css">
     <script type="module" defer src="./src/main.js"></script>
     <script src="./cm/codemirror-5.65.0/lib/codemirror.js"></script>
@@ -40,13 +40,25 @@
                 <button id="start-db-btn" class="exec-btn">StartDebugger</button>
                 <button id="execute-next-btn" class="exec-btn" disabled>Next</button>
                 <button id="move-prev-btn" class="exec-btn" disabled>Prev</button>
+                <button id="help-btn" class="exec-btn">Help</button>
                 <button id="gh-btn" class="exec-btn">Github</button>
 
+            </div>
+            <div class="opcode-container hidden" id="help-container">
+                <span class="close-opcode" id="close-help">x</span>
+                <div class="opcode-text">
+                    <ol>
+                        <li>The Program is loaded at 0x0000</li>
+                        <li>Use '#' before lable for jmp like instructions (ex: jmp #loop )</li>
+                        <li>For any issues and queries visit <a href="https://github.com/ayushk7/simsim85" target="_blank">Gihub</a>
+                        </li>
+                    </ol>
+                </div>
             </div>
             <div class="editor-container" id="editor-container">
 
             </div>
-            <div class="opcode-container hidden">
+            <div class="opcode-container hidden" id="opcode-container-box">
                 <span class="close-opcode" id="close-opcode">x</span>
                 <div class="opcode-text"></div>
             </div>
