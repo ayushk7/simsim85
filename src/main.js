@@ -197,9 +197,9 @@ function setOpcodeBox(assembled){
   assembled.forEach((bins, lineNumber) => {
     const tmp = [];
     bins.forEach(bin => {
-      tmp.push(HEX(bin, 2) + " ");
+      tmp.push(HEX(bin, 2));
     })
-    line_srings.push(tmp);
+    line_srings.push(tmp.join(" "));
   })
 
   const text = line_srings.join("\n");
