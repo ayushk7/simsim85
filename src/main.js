@@ -3,6 +3,7 @@ import { Processor } from "./Processor.js";
 import { editor, setNextMarker, clearAllMarker } from "./editor.js"
 import { Assembler } from "./assembler.js"
 import { HEX } from "./util/util.js";
+import { TestSuite } from "../tests/test.js";
 const ram = new Memory(64 * 1e3, { start: 0, end: 6000 }, document.getElementById("memory-container"));
 const processor = new Processor(ram);
 const assembler = new Assembler(editor);
@@ -229,3 +230,4 @@ function setOpcodeBox(assembled){
 // processor.executor(code[0].start_address, {reg_db: true, flag_db: true});
 
 
+// new TestSuite(processor, ram, editor, assembler, true);

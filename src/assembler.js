@@ -403,7 +403,7 @@ export class Assembler {
     }
     getBin(opcode) {
         const value = this.OP_TO_BIN[opcode];
-        console.log(value);
+        // console.log(value);
         if (value) {
             return value;
         }
@@ -434,7 +434,7 @@ export class Assembler {
         this.lineCount = this.editor.lineCount();
         this.removeAllError();
         this.doLabel();
-        console.log(this.labelTable);
+        // console.log(this.labelTable);
         this.currentLocation = loadLocation ? loadLocation : 0x0000;
         this.binaries = [];
         this.currentLineNumber = 0;
